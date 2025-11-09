@@ -23,7 +23,7 @@ footer {
     padding-left: 10px;
     position:absolute;
     bottom: 0;
-    width: 100%;
+    width: auto;
 }
 
 /* Links */
@@ -43,6 +43,7 @@ a:hover {
 /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
 #canvas {
     padding-right: 0;
-    display: none;
+    display: block;
     border: 0px none;
+    visibility: hidden;
 }
