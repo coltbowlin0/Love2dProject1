@@ -62,7 +62,7 @@
       var Module = {
         // I have removed the template placeholders ({{{arguments}}} and {{memory}}) 
         // and put in standard values.
-        arguments: ['game.love'], 
+        arguments: ['game.zip'], 
         INITIAL_MEMORY: 134217728, // A standard default memory size (128MB)
         printErr: console.error.bind(console),
         canvas: (function() {
@@ -72,7 +72,7 @@
 
           return canvas;
         })(),
-        love_file: 'game.love', // <-- Comma added here to continue the object definition
+        love_file: 'game.zip', // <-- Comma added here to continue the object definition
         
         setStatus: function(text) {
           if (text) {
