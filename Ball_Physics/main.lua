@@ -5,7 +5,7 @@ function love.load()
         radius = 100,
         speed = 400,
         gravity = 280,
-        bounciness = 0.8
+        bounciness = 0.5
     }
     ball.x = (SWidth - ball.radius) / 2
     ball.y = (SHeight - ball.radius) / 2
