@@ -1,23 +1,45 @@
-local RW, RH = love.window.getDesktopDimensions()
+-- Detect if running in the browser
+local isWeb = love.system.getOS() == "Web"
+
+local RW, RH
+
+if not isWeb then
+    -- Desktop: safe to get real monitor dimensions
+    RW, RH = love.window.getDesktopDimensions()
+else
+    -- Web: cannot use getDesktopDimensions
+    RW, RH = 800, 600  -- fallback size (won't actually show a window)
+end
+
 function love.load()
-    love.window.setMode(RW, RH - 60)
+    -- Only set window mode on desktop (love.js has no real window)
+    if not isWeb then
+        love.window.setMode(RW, RH - 60)
+    end
+
     love.window.setTitle("DvD bouncer")
+
     local Sw, Sh = love.graphics.getWidth(), love.graphics.getHeight()
+
     bouncer = {
-        sprite = love.graphics.newImage('sprites/dvdlogo.png'),
+        sprite = love.graphics.newImage("sprites/dvdlogo.png"),
         scalefactor = 1,
         rotation = 0,
         xspeed = 200,
         yspeed = 200
     }
+
     bouncer.ObjW = bouncer.sprite:getWidth()
     bouncer.ObjH = bouncer.sprite:getHeight()
-    bouncer.x = (Sw / 2 ) - (bouncer.ObjW / 2) * bouncer.scalefactor
+
+    bouncer.x = (Sw / 2) - (bouncer.ObjW / 2) * bouncer.scalefactor
     bouncer.y = (Sh / 2) - (bouncer.ObjH / 2) * bouncer.scalefactor
 end
 
+
 function love.update(dt)
     local Sw, Sh = love.graphics.getWidth(), love.graphics.getHeight()
+
     bouncer.x = bouncer.x + bouncer.xspeed * dt
     bouncer.y = bouncer.y + bouncer.yspeed * dt
 
@@ -36,9 +58,16 @@ function love.update(dt)
         bouncer.y = Sh - bouncer.ObjH
         bouncer.yspeed = -bouncer.yspeed
     end
-
 end
 
+
 function love.draw()
-    love.graphics.draw(bouncer.sprite, bouncer.x, bouncer.y, bouncer.rotation, bouncer.scalefactor, bouncer.scalefactor)
+    love.graphics.draw(
+        bouncer.sprite,
+        bouncer.x,
+        bouncer.y,
+        bouncer.rotation,
+        bouncer.scalefactor,
+        bouncer.scalefactor
+    )
 end
